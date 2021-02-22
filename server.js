@@ -32,7 +32,23 @@ const reservation = [{
         phone: '0400 100 000',
         id: '9765',
     },
+    {
+        name: 'Gary1',
+        email: 'gary@email.com',
+        phone: '0400 100 000',
+        id: '0001',
+    },
+    {
+        name: 'Gary2',
+        email: 'gary@email.com',
+        phone: '0400 100 000',
+        id: '0002',
+    },
 ];
+
+const waitList = [
+    
+]
 
 // Routes
 
@@ -46,9 +62,20 @@ app.get('/table', (req, res) => res.sendFile(path.join(__dirname, 'table.html'))
 // Displays all booked tables
 app.get('/api/table', (req, res) => res.json(reservation));
 
+app.get("/api/waitList", (req, res) => res.json(waitList));
+
+app.post("/api/new", (req, res) => {
+    const rb = req.body;
+    if (reservation.length < 5){
+        reservation.push(rb)
+    }else {
+        waitList.push(rb)
+    }
+    res.json(rb)
+})
 
 
-// // Displays a single character, or returns false
+// Displays a single character, or returns false
 app.get('/api/reservation/:reservation', (req, res) => {
     const chosen = req.params.reservation;
 

@@ -37,17 +37,18 @@ const reservation = [{
 // Routes
 
 // Basic route that sends the user first to the AJAX Page
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'home.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 app.get('/reserve', (req, res) => res.sendFile(path.join(__dirname, 'reserve.html')));
 
-app.get('/tables', (req, res) => res.sendFile(path.join(__dirname, 'tables.html')));
+app.get('/table', (req, res) => res.sendFile(path.join(__dirname, 'table.html')));
 
 // Displays all booked tables
-app.get('/api/tables', (req, res) => res.json(reservation));
+app.get('/api/table', (req, res) => res.json(reservation));
 
 
-// Displays a single character, or returns false
+
+// // Displays a single character, or returns false
 app.get('/api/reservation/:reservation', (req, res) => {
     const chosen = req.params.reservation;
 
@@ -57,9 +58,9 @@ app.get('/api/reservation/:reservation', (req, res) => {
      If the statement is true, send the character back as JSON,
      otherwise tell the user no character was found */
 
-    for (let i = 0; i < characters.length; i++) {
-        if (chosen === characters[i].routeName) {
-            return res.json(characters[i]);
+    for (let i = 0; i <= reservation.length; i++) {
+        if (chosen === reservation[i].id) {
+            return res.json(reservation[i]);
         }
     }
 
@@ -67,18 +68,18 @@ app.get('/api/reservation/:reservation', (req, res) => {
 });
 
 // Create New Characters - takes in JSON input
-app.post('/api/characters', (req, res) => {
+app.post('/api/tables', (req, res) => {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
-    const newCharacter = req.body;
+    const newRes = req.body;
 
     // Using a RegEx Pattern to remove spaces from newCharacter
     // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-    newCharacter.routeName = newCharacter.name.replace(/\s+/g, '').toLowerCase();
-    console.log(newCharacter);
+    newRes.routeName = newRes.name.replace(/\s+/g, '').toLowerCase();
+    console.log(newRes);
 
-    characters.push(newCharacter);
-    res.json(newCharacter);
+    reservation.push(newRes);
+    res.json(newRes);
 });
 
 // Starts the server to begin listening

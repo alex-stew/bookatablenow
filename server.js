@@ -1,29 +1,13 @@
 // Dependencies
-<<<<<<< HEAD
-const express = require("express");
-const path = require("path");
-
-=======
 
 const express = require('express');
 const path = require('path');
 
->>>>>>> 56c065c82ca72f64f85a47d3f685e73a521a0a39
 // Sets up the Express App
 
 const app = express();
 const PORT = 3000;
 
-<<<<<<< HEAD
-const bookings = [];
-
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
-
-app.get('/reserve', (req, res) => res.sendFile(path.join(__dirname, 'reserve.html')));
-
-app.get('/table', (req, res) => res.sendFile(path.join(__dirname, 'table.html')));
-console.log(__dirname);
-=======
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -98,6 +82,5 @@ app.post('/api/characters', (req, res) => {
 });
 
 // Starts the server to begin listening
->>>>>>> 56c065c82ca72f64f85a47d3f685e73a521a0a39
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));

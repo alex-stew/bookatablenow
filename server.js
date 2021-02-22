@@ -1,21 +1,19 @@
-// Require/import the HTTP module
-const http = require('http');
+// Dependencies
+const express = require("express");
+const path = require("path");
 
-// Define a port to listen for incoming requests
+// Sets up the Express App
+
+const app = express();
 const PORT = 3000;
 
-// Create a generic function to handle requests and responses
-const handleRequest = (request, response) => {
-    // Send the below string to the client when the user visits the PORT URL
-    response.end(`It Works!! Path Hit: ${request.url}`);
-};
+const bookings = [];
 
-// Use the Node HTTP package to create our server.
-// Pass the handleRequest function to empower it with functionality.
-const server = http.createServer(handleRequest);
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
-// Start our server so that it can begin listening to client requests.
-server.listen(PORT, () => {
-    // Log (server-side) when our server has started
-    console.log(`Server listening on: http://localhost:${PORT}`);
-});
+app.get('/reserve', (req, res) => res.sendFile(path.join(__dirname, 'reserve.html')));
+
+app.get('/table', (req, res) => res.sendFile(path.join(__dirname, 'table.html')));
+console.log(__dirname);
+
+app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
